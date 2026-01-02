@@ -15,7 +15,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LogisticRegression
 
 
-train_path = "C:/Users/Adwait Tagalpallewar/Downloads/social-media-extremism-detection-challenge/train.csv"
+train_path = "data/train.csv"
 df = pd.read_csv(train_path)
 print(df.head())
 print(df.columns)
@@ -118,7 +118,7 @@ print('uni and bigram model accuracy_score: ',accuracy_score(y_validate,y_pred))
 to make 2nd submission csv cuz kaggle allows multiple submissions'''
 
 #first submission, tuned model trained on X_train
-test_path = "C:/Users/Adwait Tagalpallewar/Downloads/social-media-extremism-detection-challenge/test.csv"
+test_path = "data/test.csv"
 test_df = pd.read_csv(test_path)
 test_df.info()
 
@@ -199,4 +199,5 @@ submission = pd.DataFrame({
 This project progressed from a Naive Bayes baseline with unigram and bigram features
 to a tuned Logistic Regression model. Performance improvements were achieved through
 feature representation and regularization tuning, while validation stability was
+
 prioritized over public leaderboard scores to ensure proper generalization.'''
