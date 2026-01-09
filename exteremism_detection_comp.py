@@ -41,9 +41,9 @@ for i in range(len(text_lengths)):
     plt.scatter(text_lengths[i],i,color='blue')
 
 plt.xlabel('Word count')
-plt.show() #gives idea about number of tokens, since NB is sensitive to token freq, mostly wordcount is 0-50 others can be considered long texts ig 
+plt.show() #gives idea about number of tokens, since NB is sensitive to token freq, mostly wordcount is 0-50 others can be considered long texts 
 
-#lets see which words appear most frequently in our training data via wordcloud
+#lets see which words appear most frequently in training data via wordcloud
 text = " ".join(df['Original_Message'])
 
 wc = WordCloud(height=400,width=800,random_state=42,background_color ='black',colormap='plasma').generate(text)
@@ -67,7 +67,7 @@ X_train,X_validate,y_train,y_validate = train_test_split(X,y,test_size=0.2,rando
 
 #pipeline 
 pipeline = Pipeline([
-    ('tfidf',TfidfVectorizer()), #turns tests into numbers, TF: how many times the word appearns in my text,IDF: How frequent is this word in complete dataset; also here for baseline n_gram=1(default)
+    ('tfidf',TfidfVectorizer()), #turns texts into numbers, TF: how many times the word appearns in my text,IDF: How frequent is this word in complete dataset; also here for baseline n_gram=1(default)
     ('model',MultinomialNB())
 ])
 
@@ -75,7 +75,7 @@ pipeline = Pipeline([
 pipeline.fit(X_train,y_train)
 y_pred = pipeline.predict(X_validate)
 
-print('Baseline model accuracy_score: ',accuracy_score(y_validate,y_pred)) #0.8022 
+print('Baseline model accuracy_score on validation set: ',accuracy_score(y_validate,y_pred)) #0.8022 
 
 #lets find a text that is miscalssified and see why so 
 baseline_validation_results = pd.DataFrame({
@@ -135,8 +135,7 @@ submission = pd.DataFrame({
 
 #second submission; tuned model trained on full training dataset not X_train
 pipeline.fit(X,y)
-y_pred= pipeline.predict(X_test) #kaggle public LB score= 0.816 which increased hehehehehehehe
-
+y_pred= pipeline.predict(X_test) #kaggle public LB score= 0.816 which increased 
 submission = pd.DataFrame({
     "ID": test_df['ID'],
     "Extremism_Label": y_pred
@@ -155,7 +154,7 @@ pipeline = Pipeline([
 
 pipeline.fit(X_train,y_train)
 y_pred = pipeline.predict(X_validate)
-print('Logistic_regression model accuracy_score: ',accuracy_score(y_validate,y_pred)) #0.82 it increased 
+print('Logistic_regression model accuracy_score on validation set: ',accuracy_score(y_validate,y_pred)) #0.82 it increased 
 
 #lets hypertune the linear regression model to see if it helps in any terms 
 C_values = range(1,100)
@@ -201,3 +200,4 @@ to a tuned Logistic Regression model. Performance improvements were achieved thr
 feature representation and regularization tuning, while validation stability was
 
 prioritized over public leaderboard scores to ensure proper generalization.'''
+
